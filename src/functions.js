@@ -28,7 +28,7 @@ const toggleTodoStatus = (todo) => {
 const displayTodos = () => {
   const listElement = document.getElementById('todos-list');
   listElement.innerHTML = '';
-  for (let i = 0; i < todos.length; i += 1) {
+  todos.forEach((todo) => {
     const todoElement = document.createElement('li');
     todoElement.classList.add('todo');
 
@@ -39,13 +39,13 @@ const displayTodos = () => {
     const checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('name', 'checkbox');
-    checkbox.checked = todos[i].completed;
+    checkbox.checked = todo.completed;
     checkbox.addEventListener('change', () => {
-      toggleTodoStatus(todos[i]);
+      toggleTodoStatus(todo);
     });
 
     const desc = document.createElement('p');
-    desc.innerText = todos[i].description;
+    desc.innerText = todo.description;
 
     todoContent.appendChild(checkbox);
     todoContent.appendChild(desc);
@@ -59,7 +59,7 @@ const displayTodos = () => {
     editBtn.setAttribute('type', 'button');
     editBtn.innerHTML = '<i class="fa fa-edit"></i>';
     editBtn.addEventListener('click', () => {
-      editTodo(todos[i]);
+      editTodo(todo);
     });
 
     const deleteBtn = document.createElement('button');
@@ -68,7 +68,7 @@ const displayTodos = () => {
     deleteBtn.setAttribute('type', 'button');
     deleteBtn.innerHTML = '<i class="fa fa-trash">';
     deleteBtn.addEventListener('click', () => {
-      removeTodo(todos[i].index);
+      removeTodo(todos.index);
     });
 
     const moreBtn = document.createElement('button');
@@ -87,7 +87,7 @@ const displayTodos = () => {
     todoElement.appendChild(todoContent);
     todoElement.appendChild(actionBtns);
     listElement.appendChild(todoElement);
-  }
+  });
   saveData();
 };
 
